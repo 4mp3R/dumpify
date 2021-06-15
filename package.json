@@ -1,0 +1,13 @@
+{
+  "name": "dumpify",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Alexei Liulin <codwizard@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "echo STARTING"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.1"
+  }
+}
