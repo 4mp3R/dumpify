@@ -5,9 +5,13 @@
   "author": "Alexei Liulin <codwizard@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "echo STARTING"
+    "dump": "node ./index.js"
   },
   "devDependencies": {
     "prettier": "^2.3.1"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1"
   }
 }

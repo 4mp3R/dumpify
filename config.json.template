@@ -1,0 +1,4 @@
+{
+  "clientId": "<Your Spotify client ID>",
+  "clientSecret": "<Your Spotify client secret>"
+}
