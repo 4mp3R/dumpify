@@ -19,6 +19,10 @@ const redirectUrl = `http://localhost:${port}/callback`;
 const outFile = './tracks.txt';
 
 app.get('/callback', async (req, res) => {
+  res.send(
+    'Please return to the console to follow the progress.<br>You can close this tab now.'
+  );
+
   const { error, code, state: receivedState } = req.query;
 
   if (error) {
@@ -47,9 +51,7 @@ app.get('/callback', async (req, res) => {
     tracks.map(stringifyTrackInfo).sort().map(numberify).join('\n')
   );
 
-  const doneMessage = `All done! You can find the list of your tracks in ${outFile}`;
-  console.log(doneMessage);
-  res.send(doneMessage);
+  console.log(`All done! You can find the list of your tracks in ${outFile}`);
 });
 
 app.listen(port, () => {
