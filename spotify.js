@@ -1,13 +1,13 @@
 const querystring = require('querystring');
 const axios = require('axios');
 
-function getAuthUrl(clientId, redirectUrl) {
+function getAuthUrl(clientId, redirectUrl, state) {
   const authorizationParams = querystring.stringify({
+    state,
     client_id: clientId,
     response_type: 'code',
     redirect_uri: redirectUrl,
     scope: 'user-library-read',
-    state: 'pikachu',
   });
 
   return `https://accounts.spotify.com/authorize?${authorizationParams}`;

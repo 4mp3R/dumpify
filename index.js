@@ -1,4 +1,5 @@
 const { writeFileSync } = require('fs');
+const { v4: uuidv4 } = require('uuid');
 
 const { clientId, clientSecret } = require('./config.json');
 const {
@@ -13,18 +14,19 @@ const express = require('express');
 const app = express();
 
 const port = 1337;
-const state = 'pikachu'; // TODO: verify state
+const state = uuidv4();
 const redirectUrl = `http://localhost:${port}/callback`;
 const outFile = './tracks.txt';
 
 app.get('/callback', async (req, res) => {
-  const { error, code, state } = req.query;
+  const { error, code, state: receivedState } = req.query;
 
   if (error) {
-    const errorMessage = `Spotify authorization error: ${error}`;
-    console.error(errorMessage);
-    res.status(400).send(errorMessage);
-    return;
+    throw new Error(`Spotify authorization error: ${error}`);
+  }
+
+  if (state !== receivedState) {
+    throw new Error(`Received state differs from the sent one`);
   }
 
   const { accessToken } = await getAuthTokens(
@@ -51,5 +53,5 @@ app.get('/callback', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Open in browser: ${getAuthUrl(clientId, redirectUrl)}`);
+  console.log(`Open in browser: ${getAuthUrl(clientId, redirectUrl, state)}`);
 });
