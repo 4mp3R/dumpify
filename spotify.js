@@ -47,7 +47,7 @@ async function fetchMusicTracks(accessToken, tracksPageUrl) {
     },
   });
 
-  console.log(`Fetched ${offset} / ${total} tracks`);
+  console.log(`Fetched ${offset + items.length} / ${total} tracks`);
 
   if (next) {
     return [...items, ...(await fetchMusicTracks(accessToken, next))];
